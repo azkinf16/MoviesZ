@@ -65,7 +65,7 @@ function Detail() {
           alt={details.title}
         />
         <div className="absolute w-full top-[23%] flex justify-evenly">
-          <div className="">
+          <div>
             <img
               src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
               className="block w-[320px] object-cover rounded-2xl transition-all duration-500 hover:scale-110 hover:rounded-2xl hover:shadow-2xl cursor-pointer"
