@@ -42,7 +42,7 @@ function MainCategory() {
         </h1>
         <ButtonCategory />
       </div>
-      <div className="grid gap-6 grid-cols-3 mx-12">
+      <div className="grid gap-6 grid-cols-4 mx-12">
         {category &&
           category.map((item, index) => (
             <div
@@ -51,7 +51,7 @@ function MainCategory() {
               key={index}
             >
               <img
-                className="w-50 rounded-lg"
+                className="w-full h-[520px] rounded-lg"
                 src={
                   item.poster_path
                     ? `https://image.tmdb.org/t/p/original/${item.poster_path}`
