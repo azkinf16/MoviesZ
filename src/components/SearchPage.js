@@ -38,7 +38,7 @@ function SearchPage() {
           </h1>
         </div>
       </div>
-      <div className="grid gap-6 grid-cols-3 mx-10 mb-10 mt-12">
+      <div className="grid gap-6 grid-cols-4 mx-10 mb-10 mt-12">
         {data?.length ? (
           data.length >= 0 &&
           data.map((item, index) => (
@@ -48,7 +48,7 @@ function SearchPage() {
               key={index}
             >
               <img
-                className="w-full h-[630px] rounded-lg"
+                className="w-full h-[520px] rounded-lg"
                 src={
                   item.poster_path
                     ? `https://image.tmdb.org/t/p/original/${item.poster_path}`
