@@ -53,6 +53,7 @@ function Navigation() {
   };
 
   const handleChangeSearch = (e) => {
+    e.preventDefault();
     setData(e.target.value);
   };
 
@@ -88,36 +89,40 @@ function Navigation() {
           <span className="font-extrabold">M</span>ovie
           <span className="text-slate-500">.sZ</span>
         </h1>
-        <div className="flex justify-around w-1/6">
+        <div className="flex justify-start w-full ml-12">
           <h5
             className="text-white text-lg cursor-pointer transition duration-500 hover:text-slate-400"
             onClick={() => navigate("/")}
           >
             Home
           </h5>
-          <h5 className="text-white text-lg cursor-pointer transition duration-500 hover:text-slate-400" onClick={() => navigate("/all-movies")}>
+          <h5
+            className="text-white text-lg cursor-pointer transition duration-500 hover:text-slate-400 ml-5"
+            onClick={() => navigate("/all-movies")}
+          >
             All Movies
           </h5>
         </div>
         <div className="flex items-center">
-          {/* <div className="bg-slate-600/25 rounded-md flex items-center px-2 w-[50px] sm:w-[400px] lg:w-[300px] ">
+          <div className="bg-slate-600/25 rounded-md flex items-center px-2 w-[300px]">
             <input
               className="bg-transparent p-2 w-full focus:outline-none placeholder:text-white/50 text-white/50"
               type="text"
               placeholder="What do you want to watch?"
               onChange={(e) => handleChangeSearch(e)}
+              onSubmit={(e) => onSubmitSearch(e)}
             />
             <AiOutlineSearch
               onClick={() => onSubmitSearch()}
               size={25}
               className="text-white/50 hover:text-white cursor-pointer transition-all duration-400"
             />
-          </div> */}
-          <AiOutlineSearch
+          </div>
+          {/* <AiOutlineSearch
             // onClick={() => onSubmitSearch()}
             size={30}
             className="text-white hover:text-slate-200 cursor-pointer mr-3"
-          />
+          /> */}
           <div className="flex items-center ml-8">
             {isUserLogin === null ? (
               <>

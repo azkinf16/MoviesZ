@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearch } from "../redux/features/searchSlicer";
 
+import { BsFillStarFill } from "react-icons/bs";
+
 function SearchPage() {
   const { search } = useParams();
   const navigate = useNavigate();
@@ -14,40 +16,34 @@ function SearchPage() {
   const noData =
     "https://financialadvisors.com/media/no-images/nodata-found.png";
 
-  
   useEffect(() => {
     dispatch(getSearch(search));
     window.scroll(0, 0);
   }, [search]);
 
-  const data = useSelector((state) => state.search.search)
+  const data = useSelector((state) => state.search.search);
 
   return (
     <>
       <div className="Header">
-        <div className="absolute w-1/2 h-[50vh] bg-gradient-to-r from-black"></div>
+        <div className="absolute w-full h-1/2 bg-gradient-to-t from-[#0F182B]"></div>
         <img
-          src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80"
+          src="https://assets.nflxext.com/ffe/siteui/vlv3/5aecc44d-2a1f-4313-8399-98df20908b64/c79d7cea-0f2f-4b5c-9130-e3a74468be57/ID-id-20221114-popsignuptwoweeks-perspective_alpha_website_small.jpg"
           className="block w-full h-[50vh] object-cover"
-          alt=""
+          alt="backdrop"
         />
-        <div className="absolute w-1/2 top-[25%] p-5 ml-5">
-          <h1 className="text-5xl font-bold text-white">
-            All Movies "{search[0].toUpperCase() + search.substring(1)}"
+        <div className="absolute w-3/4 top-[25%] p-5 ml-5">
+          <h1 className="text-4xl font-bold text-white mx-11">
+            Search Result "{search}"
           </h1>
         </div>
       </div>
-      <div className="mt-24 mb-12 mx-11">
-        <h1 className="text-3xl font-bold">
-          Search Result "{search[0].toUpperCase() + search.substring(1)}"
-        </h1>
-      </div>
-      <div className="grid gap-6 grid-cols-3 mx-10 mb-10">
+      <div className="grid gap-6 grid-cols-3 mx-10 mb-10 mt-12">
         {data?.length ? (
           data.length >= 0 &&
           data.map((item, index) => (
             <div
-              className="w-full cursor-pointer relative p-2"
+              className="group w-full cursor-pointer relative overflow-hidden"
               onClick={() => navigate(`/detail/${item.id}`)}
               key={index}
             >
@@ -60,15 +56,18 @@ function SearchPage() {
                 }
                 alt={item.name}
               />
-              <div className="absolute top-0 left-0 w-full h-full hover:bg-black/50 opacity-0 hover:opacity-100 text-white rounded-lg">
+              <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0 group-hover:bg-black/75 group-hover:rounded-lg">
                 <div className="flex justify-center items-end h-3/4 text-center">
                   <div>
-                    <p className="white-space-normal text-xs md:text-sm font-bold">
+                    <p className="text-white text-xs md:text-sm font-bold">
                       {item.title}
                     </p>
-                    <p className="white-space-normal text-xs md:text-sm font-bold mt-2">
-                      {Math.round(item.vote_average)} / 10
-                    </p>
+                    <div className="flex pl-1 text-base justify-center mr-5">
+                      <BsFillStarFill className="text-yellow-500 mt-1" />
+                      <p className="text-white ml-2">
+                        {Math.round(item.vote_average)} / 10
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
