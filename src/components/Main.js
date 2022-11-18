@@ -179,12 +179,12 @@ function Main() {
             <div
               className="inline-block relative mx-4 overflow-hidden text-center"
               key={index}
-              onClick={() => navigate(`/detail/${item.id}`)}
             >
               <img
                 className="w-full h-full cursor-pointer rounded-lg object-cover hover:scale-110 hover:shadow-2xl transition-all duration-500"
                 src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
                 alt={item.title}
+                onClick={() => navigate(`/detail/${item.id}`)}
               />
               <p className="text-white text-lg font-bold mt-4">{item.title}</p>
               <p className="text-white ml-2 italic">Release Date : </p>
