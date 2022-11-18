@@ -188,7 +188,7 @@ function Main() {
               />
               <p className="text-white text-lg font-bold mt-4">{item.title}</p>
               <p className="text-white ml-2 italic">Release Date : </p>
-              <p className="text-white ml-2 italic">{item.release_date}</p>
+              <p className="text-white ml-2 italic font-bold">{item.release_date}</p>
             </div>
           </div>
         ))}
@@ -231,7 +231,7 @@ function Main() {
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                   alt={item.title}
                 />
-                <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0 group-hover:bg-black/75 group-hover:rounded-lg">
+                <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center text-center duration-500 rounded-lg group-hover:translate-y-0 group-hover:bg-black/75">
                   <div className="flex justify-center items-end h-3/4 text-center">
                     <div>
                       <p className="text-white text-xs md:text-sm font-bold">
