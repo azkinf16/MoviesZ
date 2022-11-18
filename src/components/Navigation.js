@@ -16,7 +16,7 @@ import { onLogin, onRegister } from "../redux/features/navLogRegisSlicer";
 import { dataGoogleLogin } from "../redux/features/googleOAuthSlicer";
 
 function Navigation() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ function Navigation() {
   };
 
   const onSubmitSearch = () => {
-    navigate(`/search/${data}`);
+    data === undefined ? navigate(`/`) : navigate(`/search/${data}`);
   };
 
   const onFinishLogin = async (values) => {
@@ -85,32 +85,33 @@ function Navigation() {
   return (
     <GoogleOAuthProvider clientId="162366539553-ffa0ea6d46gfhs3q7rsovvn1qu6tbi83.apps.googleusercontent.com">
       <div className="flex items-center justify-between absolute pt-10 px-20 z-10 w-full">
-        <h1 className="text-slate-200 text-4xl font-bold cursor-pointer">
-          <span className="font-extrabold">M</span>ovie
-          <span className="text-slate-500">.sZ</span>
-        </h1>
+        <div className=" before:block before:absolute before:-inset-1 before:-skew-y-3 before:transition-all before:duration-500 before:bg-slate-600/50 hover:before:bg-[#0F182B]/50 relative inline-block p-4">
+          <h1 className="text-slate-200 text-3xl font-bold cursor-pointer my-auto relative">
+            <span className="font-extrabold">M</span>ovie
+            <span className="text-slate-300">.sZ</span>
+          </h1>
+        </div>
         <div className="flex justify-start w-full ml-12">
           <h5
-            className="text-white text-lg cursor-pointer transition duration-500 hover:text-slate-400"
+            className="text-white text-lg cursor-pointer relative after:content-[''] after:bg-slate-400 after:h-[1.5px] after:w-0 after:left-0 after:-bottom-[1.5px] after:rounded-xl after:absolute after:duration-500 after:hover:w-full"
             onClick={() => navigate("/")}
           >
             Home
           </h5>
           <h5
-            className="text-white text-lg cursor-pointer transition duration-500 hover:text-slate-400 ml-5"
+            className="text-white text-lg cursor-pointer relative after:content-[''] after:bg-slate-400 after:h-[1.5px] after:w-0 after:left-0 after:-bottom-[1.5px] after:rounded-xl after:absolute after:duration-500 after:hover:w-full ml-5"
             onClick={() => navigate("/all-movies")}
           >
             All Movies
           </h5>
         </div>
         <div className="flex items-center">
-          <div className="bg-slate-600/25 rounded-md flex items-center px-2 w-[300px]">
+          <div className="bg-slate-600/50 hover:bg-[#0F182B]/50 transition-all duration-300 rounded-md flex items-center px-2 w-[300px]">
             <input
               className="bg-transparent p-2 w-full focus:outline-none placeholder:text-white/50 text-white/50"
               type="text"
               placeholder="What do you want to watch?"
               onChange={(e) => handleChangeSearch(e)}
-              onSubmit={(e) => onSubmitSearch(e)}
             />
             <AiOutlineSearch
               onClick={() => onSubmitSearch()}
