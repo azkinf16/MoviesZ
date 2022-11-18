@@ -1,55 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import Pagination from "@mui/material/Pagination";
+// import Stack from "@mui/material/Stack";
+
+import { Pagination } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "../redux/features/allMoviesSlicer";
 
+import { BsFillStarFill } from "react-icons/bs";
+
 function AllMoviesPage() {
-  const [page, setPage] = useState();
+  const [current, setCurrent] = useState(1);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const API_KEY = "ae4dbdc73a2bf042cb271a0b322631d5";
-
-  const [filter, setFilter] = useState({
-    api_key: API_KEY,
-    include_adult: false,
-    page: `${page}`,
-  });
-
   const unavailable = "https://www.movienewz.com/img/films/poster-holder.jpg";
 
-  const handlePageChange = (page) => {
-    setPage(page);
-    setFilter({ ...filter, page: page });
+  const onChange = (page) => {
+    console.log(page);
+    setCurrent(page);
   };
 
   useEffect(() => {
-    dispatch(getAllMovies(page));
+    dispatch(getAllMovies(current));
     window.scroll(0, 0);
-  }, [page]);
+  }, [current]);
 
   const allMovies = useSelector((state) => state.allMovies.allMovies);
-
-  const theme = createTheme({
-    status: {
-      danger: "#e53e3e",
-    },
-    palette: {
-      primary: {
-        main: "#0971f1",
-        darker: "#053e85",
-      },
-      neutral: {
-        main: "#64748B",
-        contrastText: "#fff",
-      },
-    },
-  });
 
   return (
     <>
@@ -64,25 +43,10 @@ function AllMoviesPage() {
           <h1 className="text-5xl font-bold text-white mx-11">All Movies</h1>
         </div>
       </div>
-      <div className="mt-24 mx-11 flex items-end justify-between ">
-        <h1 className="text-4xl font-bold text-white">Result of All Movies</h1>
-        <ThemeProvider theme={theme}>
-          <Stack spacing={2}>
-            <Pagination
-              count={5}
-              variant="outlined"
-              color="neutral"
-              onChange={(e) => handlePageChange(e.target.textContent)}
-              hideNextButton
-              hidePrevButton
-            />
-          </Stack>
-        </ThemeProvider>
-      </div>
-      <div className="grid gap-6 grid-cols-4 mx-9 mt-12">
+      <div className="grid gap-6 grid-cols-4 mx-9 mt-20">
         {allMovies.map((item, index) => (
           <div
-            className="w-full cursor-pointer relative p-2"
+            className="group w-full cursor-pointer relative overflow-hidden"
             onClick={() => navigate(`/detail/${item.id}`)}
             key={index}
           >
@@ -95,20 +59,26 @@ function AllMoviesPage() {
               }
               alt={item.name}
             />
-            <div className="absolute top-0 left-0 w-full h-full hover:bg-black/50 opacity-0 hover:opacity-100 text-white rounded-lg">
+            <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0 group-hover:bg-black/75 group-hover:rounded-lg">
               <div className="flex justify-center items-end h-3/4 text-center">
                 <div>
-                  <p className="white-space-normal text-xs md:text-sm font-bold">
+                  <p className="text-white text-xs md:text-sm font-bold">
                     {item.title}
                   </p>
-                  <p className="white-space-normal text-xs md:text-sm font-bold mt-2">
-                    {Math.round(item.vote_average)} / 10
-                  </p>
+                  <div className="flex pl-1 text-base justify-center mr-5">
+                    <BsFillStarFill className="text-yellow-500 mt-1" />
+                    <p className="text-white ml-2">
+                      {Math.round(item.vote_average)} / 10
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-20 w-full text-center">
+        <Pagination current={current} onChange={onChange} total={50} />
       </div>
     </>
   );
