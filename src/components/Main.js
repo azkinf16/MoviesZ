@@ -181,7 +181,7 @@ function Main() {
               key={index}
             >
               <img
-                className="w-full h-full cursor-pointer rounded-lg object-cover hover:scale-110 hover:shadow-2xl transition-all duration-500"
+                className="w-[500px] h-full cursor-pointer rounded-lg object-cover hover:scale-110 hover:shadow-2xl transition-all duration-500"
                 src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
                 alt={item.title}
                 onClick={() => navigate(`/detail/${item.id}`)}
